@@ -6,6 +6,8 @@ POST /contract controllers.ContractController.create()
 
 PUT /contract controllers.ContractController.update()
 
+GET /contract controllers.ContractController.getAll()
+
 GET /contract/customer/:uuid controllers.ContractController.getAllForCustomer(uuid: String)
 
 GET /contract/executor/:uuid controllers.ContractController.getAllForExecutor(uuid: String)

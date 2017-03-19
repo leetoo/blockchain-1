@@ -45,6 +45,10 @@ class ContractController @Inject extends Controller {
       })
   }
 
+  def getAll = Action.async { implicit request =>
+    Api.contractOps.getAll().map(all => Ok(Json.parse(all)))
+  }
+
   def getAllForCustomer(uuid: String) = Action.async(parse.tolerantText) { implicit request =>
         Api.contractOps.getAllForCustomer(UUID.fromString(uuid))
           .map(c => Ok(Json.toJson(c)))
