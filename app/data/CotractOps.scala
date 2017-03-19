@@ -14,6 +14,7 @@ trait ContractOpsComponent {
     def getAllForCustomer(uuid: UUID): Future[Seq[Contract]]
     def getAllForExecutor(uuid: UUID): Future[Seq[Contract]]
     def update(contract: Contract): Future[Option[Contract]]
+    def getAll(): Future[Seq[Contract]]
   }
 }
 
@@ -34,6 +35,9 @@ trait DefaultContractOpsComponent extends ContractOpsComponent {
 
     override def update(contract: Contract): Future[Option[Contract]] =
       contractData.update(contract)
+
+    override def getAll(): Future[Seq[Contract]] =
+      contractData.getAll()
   }
 }
 
@@ -45,6 +49,7 @@ trait ContractDataComponent {
     def getAllForCustomer(uuid: UUID): Future[Seq[Contract]]
     def getAllForExecutor(uuid: UUID): Future[Seq[Contract]]
     def update(contract: Contract): Future[Option[Contract]]
+    def getAll(): Future[Seq[Contract]]
   }
 }
 
@@ -53,6 +58,10 @@ trait DefaultContractDataComponent extends ContractDataComponent {
 
   class DefaultContractData extends ContractData {
     private[this] val contracts = collection.mutable.ArrayBuffer.empty[Contract]
+
+    override def getAll() = Future {
+      contracts.toList
+    }
 
     override def create(newContract: NewContract): Future[Contract] = Future {
       val contract = Contract(UUID.randomUUID(), newContract.name, newContract.sustomerUUID,
