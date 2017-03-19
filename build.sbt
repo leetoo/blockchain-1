@@ -11,6 +11,7 @@ scalaVersion := "2.11.8"
 
 libraryDependencies ++=
   Dependencies.cassandra ++
+  Dependencies.rabbit ++
   Dependencies.akka ++
   Dependencies.jwt ++
   Seq(filters)
