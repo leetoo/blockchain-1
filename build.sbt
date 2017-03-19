@@ -1,4 +1,5 @@
-enablePlugins(DockerPlugin)
+//enablePlugins(DockerPlugin)
+enablePlugins(PlayScala)
 
 test in assembly := {}
 
@@ -8,7 +9,12 @@ version := "1.0"
 
 scalaVersion := "2.11.8"
 
-libraryDependencies ++= Dependencies.cassandra ++ Dependencies.akka
+libraryDependencies ++=
+  Dependencies.cassandra ++
+  Dependencies.akka ++
+  Dependencies.jwt ++
+  Seq(filters)
+
 
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard

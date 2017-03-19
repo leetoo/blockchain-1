@@ -1,0 +1,15 @@
+POST /login controllers.UserLoginController.login()
+
+POST /user controllers.UserCreatorController.create()
+
+POST /contract controllers.ContractController.create()
+
+PUT /contract controllers.ContractController.update()
+
+GET /contract/customer/:uuid controllers.ContractController.getAllForCustomer(uuid: String)
+
+GET /contract/executor/:uuid controllers.ContractController.getAllForExecutor(uuid: String)
+
+POST /maket/:uuid controllers.FileUploader.uploadMaket(uuid: String)
+
+PUT /result/:uuid controllers.FileUploader.uploadResult(uuid: String)
